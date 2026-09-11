@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/ex1.dir/link.d CMakeFiles/ex1.dir/src/atomicEx/atomic_experiment.cpp.o -o ex1  /usr/lib/x86_64-linux-gnu/libfmt.so.10.1.0

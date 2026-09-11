@@ -1,0 +1,3 @@
+/home/lin/cppConcurrent/build-release/CMakeFiles/ex1.dir
+/home/lin/cppConcurrent/build-release/CMakeFiles/edit_cache.dir
+/home/lin/cppConcurrent/build-release/CMakeFiles/rebuild_cache.dir
