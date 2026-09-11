@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.31)
 
 # a expremental project for concurrency of mutex in POSIX standard.
-project(ConcurrentExperiment VERSION 3.31 C LANGUAGES CXX)
+project(ConcurrentExperiment VERSION 0.0.1 C LANGUAGES CXX)
 
 find_package(fmt CONFIG REQUIRED)
 
