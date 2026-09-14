@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.31)
+include(FetchContent)
 
 # a expremental project for concurrency of mutex in POSIX standard.
 project(ConcurrentExperiment VERSION 0.0.1 C LANGUAGES CXX)
