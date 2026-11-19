@@ -1,11 +1,22 @@
 cmake_minimum_required(VERSION 3.31)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON) # For clang-tidy.
 include(FetchContent)
 
 # a expremental project for concurrency of mutex in POSIX standard.
-project(ConcurrentExperiment VERSION 0.0.1 C LANGUAGES CXX)
+project(ConcurrentExperiment VERSION 0.0.1 LANGUAGES C CXX)
+
+# Specify the C++ standard
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
+
 
 find_package(fmt CONFIG REQUIRED)
 
-add_executable(ex1 src/atomicEx/atomic_experiment.cpp)
+# Include
+set(CPPCONCURRENT_SRC_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/src/include)
 
+include_directories(${CPPCONCURRENT_SRC_INCLUDE_DIR})
+include_directories(BEFORE src)
+
+add_executable(ex1 src/atomicEx/atomic_experiment.cpp)
 target_link_libraries(ex1 PRIVATE fmt::fmt)
