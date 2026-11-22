@@ -5,3 +5,5 @@ template <typename T> ShardsPerThread<T>::ShardsPerThread(T initial) {
     slot.value = initial;
   }
 }
+
+template struct ShardsPerThread<uint64_t>;
