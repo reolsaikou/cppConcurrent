@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.31)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON) # For clang-tidy.
+
+message(STATUS "cpp parallel programming")
+
 include(FetchContent)
 
 # a expremental project for concurrency of mutex in POSIX standard.

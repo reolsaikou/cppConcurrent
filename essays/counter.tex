@@ -1,0 +1,13 @@
+There are three ways tested in this repository to implement shared counters.
+
+First: use a global atomic counter shared with threads. 
+
+Second: Use thread-local atomic variable to count, with a 10x performance against the first one.
+
+Third: Use thread-local volatile variable to count, with a 15x performance against the second one, 150x performance against the first one.
+
+Note:
+1. Macro is complex to use, a better way in cpp is use template and use Macro in somewhen necessary such as voklatile read or write.
+
+Examples:
+1. for network packets counting

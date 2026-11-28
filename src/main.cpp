@@ -2,13 +2,13 @@
 #include "shared_counters.h"
 #include <atomic>
 #include <bits/types/struct_timeval.h>
-#include <cstdint>
 #include <cstdio>
 #include <fmt/core.h>
+#include <inttypes.h>
 #include <pthread.h>
+#include <stdint.h>
 #include <sys/select.h>
 #include <sys/time.h>
-#include <system_error>
 #include <unistd.h>
 
 constexpr uint64_t per_thread_update = 1e8;
@@ -59,7 +59,7 @@ void *counter(void *args) {
 
   uint64_t result = READ_ONCE(thread_counter->value);
 
-  fprintf(stdout, "coutn result: %llu\n", result);
+  fprintf(stdout, "count result: %" PRIu64 "\n", result);
 
   return nullptr;
 }
@@ -88,7 +88,7 @@ void *counter_atomic(void *args) {
   // uint64_t result = READ_ONCE(thread_counter->value);
   uint64_t result = thread_counter->value_atomic.load();
 
-  fprintf(stdout, "count result: %llu\n", result);
+  fprintf(stdout, "count result: %" PRIu64 "\n", result);
 
   return nullptr;
 }
@@ -131,8 +131,7 @@ int main() {
   constexpr int N = COUNTERS_NUM;
 
   for (int i = 0; i < COUNTERS_NUM; i++) {
-    pthread_create(&__thread_id_map[i], nullptr, counter_atomic,
-                   &per_thread_counters);
+    pthread_create(&__thread_id_map[i], nullptr, counter, &per_thread_counters);
   }
 
   CountMetrics metrics(duration_time);
@@ -141,11 +140,11 @@ int main() {
   while (!metrics.shouldFinish()) {
     sleep(1);
     i++;
-    // uint64_t observe = read_count(per_thread_counters);
-    uint64_t observe = read_count_atomic(per_thread_counters);
+    uint64_t observe = read_count(per_thread_counters);
+    // uint64_t observe = read_count_atomic(per_thread_counters);
     // uint64_t observe = global_counter.load(std::memory_order_relaxed);
 
-    fprintf(stdout, "%d s, sum of the counters: %llu.\n", i, observe);
+    fprintf(stdout, "%d s, sum of the counters: %" PRIu64 ".\n", i, observe);
   }
 
   for (int i = 0; i < COUNTERS_NUM; i++) {
